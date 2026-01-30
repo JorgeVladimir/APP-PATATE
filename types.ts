@@ -1,0 +1,197 @@
+
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  MANAGER = 'MANAGER',
+  ACCOUNTANT = 'ACCOUNTANT',
+  TELLER = 'TELLER',
+  MEMBER = 'MEMBER',
+  CREDIT_OFFICER = 'CREDIT_OFFICER'
+}
+
+export enum AccountType {
+  SAVINGS = 'AHORRO_VISTA',
+  CERTIFICATE = 'CERTIFICADO_APORTACION',
+  LOAN = 'PRESTAMO'
+}
+
+export type CreditRating = 'EXCELENTE' | 'BUENO' | 'REGULAR' | 'MALO' | 'NEGADO';
+
+export interface CreditBureauProfile {
+  score: number; // 0 - 1000
+  rating: CreditRating;
+  lastUpdate: string;
+  totalLoans: number;
+  delinquencyDays: number;
+}
+
+export interface FixedAsset {
+  id: string;
+  name: string;
+  category: string;
+  purchaseDate: string;
+  value: number;
+  depreciation: number;
+}
+
+export interface InterestRate {
+  id: string;
+  category: string;
+  rate: number; 
+  maxTerm: number;
+}
+
+export interface GlobalConfig {
+  minLoanAmount: number;
+  maxLoanAmount: number;
+  maxGlobalTerm: number;
+}
+
+export interface LoanInstallment {
+  number: number;
+  date: string;
+  capital: number;
+  interest: number;
+  total: number;
+  status: 'PENDIENTE' | 'PAGADO';
+}
+
+export interface Loan {
+  id: string;
+  memberId: string;
+  memberName: string;
+  amount: number;
+  balance: number;
+  rate: number;
+  installmentsCount: number;
+  installments: LoanInstallment[];
+  status: 'VIGENTE' | 'VENCIDO' | 'PAGADO' | 'SOLICITADO' | 'RECHAZADO';
+  type: string;
+  startDate: string;
+  dueDate: string;
+  comments?: string;
+}
+
+export interface Transaction {
+  id: string;
+  date: string;
+  description: string;
+  amount: number;
+  type: 'DEBIT' | 'CREDIT';
+  category: string;
+  accountId: string;
+  reference?: string;
+  isCash?: boolean;
+  tellerId?: string;
+}
+
+export interface PersonalReference {
+  name: string;
+  phone: string;
+  relationship: string;
+}
+
+export interface Dependent {
+  id: string;
+  name: string;
+  relationship: string;
+}
+
+export interface User {
+  id: string; 
+  name: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  onlyOneName?: boolean;
+  pin: string;
+  role: UserRole;
+  accounts: Account[];
+  transactions: Transaction[];
+  loans: Loan[];
+  registrationDate?: string;
+  needsPinChange?: boolean;
+  email?: string;
+  phone?: string;
+  address?: string;
+  birthDate?: string;
+  profession?: string;
+  memberNumber?: string;
+  office?: string;
+  
+  // Campos técnicos (Informix/Backend) solicitados por el usuario
+  usuaCodEmpl?: number;
+  usuaCodPerf?: string;
+  usuaNomUsua?: string;
+  usuaPasswd?: string;
+  usuaFecUac?: string;
+  usuaNumAgen?: number;
+  usuaBanUsua?: number;
+  usuaImpPred?: string;
+
+  // Localización actual (Residencia)
+  residenceCountry?: string;
+  province?: string;
+  city?: string;
+  parish?: string;
+  // Identidad y Nacimiento (S01)
+  idType?: string;
+  birthCountry?: string;
+  birthProvince?: string;
+  birthCity?: string;
+  birthParish?: string;
+  ethnicity?: string;
+  gender?: 'MASCULINO' | 'FEMENINO' | 'OTRO';
+  maritalStatus?: 'SOLTERO' | 'CASADO' | 'DIVORCIADO' | 'VIUDO' | 'UNIÓN DE HECHO';
+  // Datos Cónyuge
+  spouseId?: string;
+  spouseName?: string;
+  spousePhone?: string;
+  // Dirección Trabajo
+  workAddress?: string;
+  workProvince?: string;
+  workCity?: string;
+  workParish?: string;
+  // Complementarios
+  dependentsCount?: number;
+  dependents?: Dependent[];
+  instructionLevel?: string;
+  homeCoordinates?: { lat: string; lng: string };
+  workCoordinates?: { lat: string; lng: string };
+  homeSketch?: string[]; 
+  workSketch?: string; 
+  references?: PersonalReference[];
+  bureau?: CreditBureauProfile;
+}
+
+export interface Account {
+  id: string;
+  type: AccountType;
+  number: string;
+  balance: number;
+  currency: string;
+}
+
+export enum AppView {
+  LOGIN = 'LOGIN',
+  REGISTER = 'REGISTER',
+  DASHBOARD = 'DASHBOARD',
+  TRANSFERS = 'TRANSFERS',
+  SAVINGS = 'SAVINGS',
+  CREDITS = 'CREDITS',
+  TELLER_OPERATIONS = 'TELLER_OPERATIONS',
+  CHART_OF_ACCOUNTS = 'CHART_OF_ACCOUNTS',
+  ADMIN_HUB = 'ADMIN_HUB',
+  CREDIT_OFFICER_HUB = 'CREDIT_OFFICER_HUB',
+  REPORTS = 'REPORTS',
+  BI_PANEL = 'BI_PANEL',
+  PROFILE = 'PROFILE',
+  CHANGE_PIN = 'CHANGE_PIN'
+}
+
+export interface ChartOfAccountEntry {
+  code: string;
+  name: string;
+  level: number;
+  type: 'ASSET' | 'LIABILITY' | 'EQUITY' | 'REVENUE' | 'EXPENSE';
+  balance: number;
+}

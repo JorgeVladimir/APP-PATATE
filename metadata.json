@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Caja de Ahorro Patate - Banca en Línea",
+  "description": "Portal transaccional oficial de la Caja de Ahorro Patate. Gestión de ahorros, créditos y transferencias con seguridad de nivel bancario.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

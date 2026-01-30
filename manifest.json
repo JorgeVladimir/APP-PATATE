@@ -1,0 +1,17 @@
+
+{
+  "short_name": "CAP Banca",
+  "name": "Caja de Ahorro Patate Online",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2830/2830284.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#14532D",
+  "background_color": "#f1f5f9"
+}
